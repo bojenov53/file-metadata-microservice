@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import { uploadFile } from '../controller/fileController.js';
+import fileController from '../controller/fileController.js';
 
 const catchAsync = (fn) => (req, res, next) => {
     Promise.resolve(fn(req, res, next)).catch((err) => next(err))
@@ -11,6 +11,6 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 
-router.post('/upload', upload.single('upfile'), catchAsync(uploadFile));
+router.post('/upload', upload.single('upfile'), catchAsync(fileController.uploadFile));
 
 export default router;
